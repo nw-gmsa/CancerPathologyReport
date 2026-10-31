@@ -30,5 +30,5 @@ invasion, excision margins, synchronous tumour and lymph node counts - are
 results on the report using the base `Observation-resultslab-eu-lab`. Profiles
 for them can be added later.
 
-Value sets for the COSD national codes (specimen nature, grade, margins, MMR
-results and so on) and for SNOMED CT topography and morphology are not defined yet.
+Value sets for the COSD national codes and for SNOMED CT topography and
+morphology are listed on the [Terminology](terminology.html) page.

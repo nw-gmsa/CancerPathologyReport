@@ -51,6 +51,7 @@ The specimen a cancer pathology report is about. Based on HL7 Europe Laboratory
 * identifier MS
 * type MS
 * type ^short = "Specimen Nature (pCR0970) - primary tumour, lymph node, metastatic site"
+* type from COSDSpecimenNature (preferred)
 * subject 1..1 MS
 * subject only Reference($EuPatient)
 * receivedTime MS
@@ -60,8 +61,10 @@ The specimen a cancer pathology report is about. Based on HL7 Europe Laboratory
 * collection.collected[x] ^short = "Sample Collection Date (pCR1010)"
 * collection.method MS
 * collection.method ^short = "Pathology Investigation Type (pCR0760) - biopsy, excision, cytology"
+* collection.method from COSDPathologyInvestigationType (preferred)
 * collection.bodySite MS
 * collection.bodySite ^short = "Topography (SNOMED) (pCR6410)"
+* collection.bodySite from CancerTopography (preferred)
 
 // Diagnosis
 
@@ -76,8 +79,10 @@ profile and the HL7 Europe Common Cancer Model `CancerConditionAtDiagnosis`.
 """
 * code MS
 * code ^short = "Diagnosis (ICD Pathological) (pCR0810), or SNOMED CT"
+* code from CancerDiagnosis (preferred)
 * bodySite MS
 * bodySite ^short = "Topography (SNOMED) (pCR6410), with Tumour Laterality (pCR0820)"
+* bodySite from CancerTopography (preferred)
 * subject MS
 * subject only Reference($EuPatient)
 * stage MS
@@ -99,6 +104,7 @@ COSD Morphology (SNOMED) (pCR6420).
 * value[x] 1..1 MS
 * value[x] only CodeableConcept
 * value[x] ^short = "Morphology (SNOMED CT morphologic abnormality) (pCR6420)"
+* value[x] from CancerMorphology (extensible)
 
 Profile:        HistologicGrade
 Parent:         http://hl7.eu/fhir/laboratory/StructureDefinition/Observation-resultslab-eu-lab
@@ -115,6 +121,7 @@ Differentiation (Pathological) (pCR0860).
 * value[x] 1..1 MS
 * value[x] only CodeableConcept
 * value[x] ^short = "GX, G1, G2, G3, G4 (pCR0860)"
+* value[x] from COSDGradeOfDifferentiation (extensible)
 * method MS
 * method ^short = "Grading system, where site specific"
 
@@ -141,6 +148,7 @@ RuleSet: TNMObservation
 * insert CancerPathologyObservation
 * method 1..1 MS
 * method ^short = "TNM Coding Edition (pCR6980) - UICC, AJCC or ENETS - and TNM Version Number (pCR6820)"
+* method from COSDTNMCodingEdition (extensible)
 * value[x] 1..1 MS
 * value[x] only CodeableConcept
 
@@ -201,6 +209,7 @@ Title:          "Neoadjuvant Therapy Indicator"
 Description:    "Whether the stage was recorded after treatment given before surgery. COSD Neoadjuvant Therapy Indicator (pCR1000). No mCODE equivalent."
 Context:        Observation
 * value[x] only CodeableConcept
+* value[x] from COSDNeoadjuvantTherapyIndicator (required)
 
 // Biomarkers
 
@@ -220,6 +229,7 @@ trigger for the Lynch syndrome reflex order to genomics.
 * value[x] 1..1 MS
 * value[x] only CodeableConcept or Quantity
 * value[x] ^short = "MMR: nuclear expression intact Y/N/E (equivocal)/F (failed); Ki-67: % of positive tumour cells"
+* value[x] from COSDNuclearExpressionIntact (extensible)
 * dataAbsentReason ^short = "Ki-67 done but not available, or not done (pCR7000); MMR test not performed"
 
 ValueSet:       CancerPathologyTumorMarkerTest

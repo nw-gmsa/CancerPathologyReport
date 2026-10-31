@@ -98,6 +98,30 @@ E Equivocal, F Test failed, X Not performed.
   * msh2 1..1 CodeableConcept "MSH2 Nuclear Expression Intact" "pCR7040"
   * msh6 1..1 CodeableConcept "MSH6 Nuclear Expression Intact" "pCR7050"
 
+// Terminology bindings
+
+* reportStatus from COSDServiceReportStatus (required)
+* specimen.specimenNature from COSDSpecimenNature (required)
+* specimen.investigationType from COSDPathologyInvestigationType (required)
+* diagnosis.snomedVersion from COSDSnomedVersion (required)
+* diagnosis.topography from CancerTopography (extensible)
+* diagnosis.morphology from CancerMorphology (extensible)
+* diagnosis.icdDiagnosis from CancerDiagnosis (extensible)
+* tumour.laterality from COSDTumourLaterality (required)
+* tumour.grade from COSDGradeOfDifferentiation (required)
+* tumour.vascularOrLymphaticInvasion from COSDVascularOrLymphaticInvasion (required)
+* tumour.perineuralInvasion from COSDPerineuralInvasion (required)
+* tumour.excisionMargin from COSDExcisionMargin (required)
+* tumour.circumferentialMargin from COSDCircumferentialMargin (required)
+* tumour.synchronousTumour from COSDSynchronousTumourIndicator (required)
+* stage.codingEdition from COSDTNMCodingEdition (required)
+* stage.neoadjuvantTherapy from COSDNeoadjuvantTherapyIndicator (required)
+* ki67.indicator from COSDKi67Indicator (required)
+* mmrImmunohistochemistry.mlh1 from COSDNuclearExpressionIntact (required)
+* mmrImmunohistochemistry.pms2 from COSDNuclearExpressionIntact (required)
+* mmrImmunohistochemistry.msh2 from COSDNuclearExpressionIntact (required)
+* mmrImmunohistochemistry.msh6 from COSDNuclearExpressionIntact (required)
+
 Mapping:        PathologyReport-COSD
 Source:         PathologyReport
 Target:         "https://www.ndrs.nhs.uk/cosd-pathology"

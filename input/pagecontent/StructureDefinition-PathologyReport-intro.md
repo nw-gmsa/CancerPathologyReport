@@ -98,10 +98,10 @@ groupings above are added to make the model easier to read.
 
 ### Terminology
 
-| Items | Coding | FHIR value set available? |
+| Items | Coding | Value set in this guide |
 |---|---|---|
-| Topography (`pCR6410`), Morphology (`pCR6420`) | SNOMED, version given by `pCR6990`. Only SNOMED CT is licensed for new data since April 2017; older data may hold SNOMED II/3/RT T and M codes | No published COSD value set. SNOMED CT can be used directly as hierarchies: body structure for topography, morphologically abnormal structure for morphology. FHIR core [SNOMED CT Body Structures](http://hl7.org/fhir/R4/valueset-body-site.html) covers topography |
-| Diagnosis (`pCR0810`) | ICD-10 | ICD-10 code system; no COSD value set |
-| Report status, specimen nature, investigation type, laterality, grade, invasion, margins, TNM edition, Ki-67 indicator, MMR results | NHS Data Dictionary national codes, listed in the COSD Pathology user guide | No - not published as FHIR CodeSystems or ValueSets that we have found |
-| TNM categories (`pCR0910`-`pCR0940`) | UICC/AJCC/ENETS text values | No - TNM is licensed; SNOMED CT has TNM concepts |
+| Topography (`pCR6410`), Morphology (`pCR6420`) | SNOMED, version given by `pCR6990`. Only SNOMED CT is licensed for new data since April 2017; older data may hold SNOMED II/3/RT T and M codes | [Cancer Topography](ValueSet-cancer-topography.html) and [Cancer Morphology](ValueSet-cancer-morphology.html) - SNOMED CT hierarchies. COSD publishes no value set |
+| Diagnosis (`pCR0810`) | ICD-10 | [Cancer Diagnosis](ValueSet-cancer-diagnosis.html) |
+| Report status, specimen nature, investigation type, laterality, grade, invasion, margins, synchronous tumour, TNM edition, neoadjuvant therapy, Ki-67 indicator, MMR results | NHS Data Dictionary national codes, listed in the COSD Pathology user guide | One CodeSystem and ValueSet per item, defined in this guide - see [Terminology](terminology.html) |
+| TNM categories (`pCR0910`-`pCR0940`) | UICC/AJCC/ENETS text values | None - TNM is licensed; SNOMED CT has TNM concepts |
 {:.grid}

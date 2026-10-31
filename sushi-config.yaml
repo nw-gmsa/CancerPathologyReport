@@ -36,9 +36,13 @@ pages:
   profiles.md:
     title: Profiles
     generation: markdown
+  terminology.md:
+    title: Terminology
+    generation: markdown
 
 menu:
   Home: index.html
   Logical Model: StructureDefinition-PathologyReport.html
   Profiles: profiles.html
+  Terminology: terminology.html
   Artifacts: artifacts.html
