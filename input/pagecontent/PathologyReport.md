@@ -337,6 +337,100 @@ flowchart LR
     LIMS -.-> NDRS
 ```
 
+### FHIR Document
+
+The report above is a `DiagnosticReport` with its results - suited to workflow
+exchange. For **document sharing** (for example IHE XDS/MHD, or the NHS England
+National Record Locator) the same report would be sent as a FHIR Document: a
+`Bundle` of type `document` with a `Composition` as its first entry.
+
+Neither COSD Pathology nor any other source defines a document layout for a COSD
+report. A layout can be **inferred** by combining three sources:
+
+| Source | What it gives |
+|---|---|
+| [HL7 Europe Laboratory Report](https://hl7.eu/fhir/laboratory/) `Composition-eu-lab` and `Bundle-eu-lab` | The base profiles. Sections are limited to **two levels**: the top level for the study or specialty, the second for report items. An **Annotations** section (LOINC `48767-8`) carries comments as text only. The Composition and the `DiagnosticReport` reference each other |
+| HL7 US [Cancer Pathology Data Sharing](https://hl7.org/fhir/us/cancer-reporting/index.html) US Pathology Composition | The cancer pathology pattern: `type` is the checklist used (a CAP eCP form code), `author` is the pathologist, an extension links to the `DiagnosticReport`, and section entries follow the checklist sections. Its breast cancer example has one section, LOINC `26436-6` Laboratory studies (set), whose entries are Observations for each checklist section |
+| [NAACCR Volume V](LAB-3.html) | The LOINC codes for the narrative report sections and for the synoptic report, used the same way in HL7 v2 |
+{:.grid}
+
+#### Inferred layout
+
+<div class="alert alert-warning" role="alert">
+<b>Proposal.</b> This layout is inferred for this proof of concept. A Cancer
+Pathology Composition profile has not been created yet.
+</div>
+
+```mermaid
+flowchart TB
+    subgraph BUNDLE["Bundle (Bundle-eu-lab, type = document)"]
+        direction TB
+        COMP["<b>Composition</b> (Composition-eu-lab)<br/>type: LOINC 60567-5 Comprehensive pathology report panel<br/>category: 26436-6 Laboratory studies; General pathology<br/>subject: Patient - author: pathologist (pCR7130/7140)<br/>custodian: reporting laboratory (pCR0800)"]
+
+        subgraph S1["Section: Surgical pathology study (LOINC 11529-5) - narrative"]
+            direction LR
+            S11["Clinical history<br/>22636-5<br/><i>text</i>"]
+            S12["Site of origin<br/>22633-2<br/><i>text + Specimen</i>"]
+            S13["Gross description<br/>22634-0<br/><i>text</i>"]
+            S14["Microscopic observation<br/>22635-7<br/><i>text</i>"]
+            S15["Final diagnosis<br/>22637-3<br/><i>text + Primary Cancer Condition</i>"]
+        end
+
+        subgraph S2["Section: Pathology synoptic report (LOINC 60568-3) - COSD Pathology core"]
+            direction LR
+            S21["Specimen<br/><i>Cancer Pathology Specimen</i>"]
+            S22["Diagnosis<br/><i>Primary Cancer Condition,<br/>Histologic Behavior and Type</i>"]
+            S23["Tumour<br/><i>Histologic Grade, Tumor Size,<br/>invasion and margin results</i>"]
+            S24["Lymph nodes<br/><i>lymph node results</i>"]
+            S25["Pathological stage<br/><i>TNM Stage Group, T, N, M</i>"]
+            S26["Biomarkers<br/><i>Tumor Marker Test<br/>(Ki-67, MMR IHC)</i>"]
+        end
+
+        S3["Section: Annotations (LOINC 48767-8)<br/><i>comments - text only</i>"]
+        DR["Cancer Pathology Diagnostic Report<br/><i>result: the same Observations</i>"]
+        RES["Patient, PractitionerRole, Organization,<br/>Specimen, Condition and Observation resources"]
+    end
+
+    COMP --> S1
+    COMP --> S2
+    COMP --> S3
+    COMP <-->|"extension diagnosticReport /<br/>DiagnosticReport composition"| DR
+    S2 -.->|"entry"| RES
+    DR -.->|"result, specimen"| RES
+
+    click DR "StructureDefinition-CancerPathologyDiagnosticReport.html"
+    click S21 "StructureDefinition-CancerPathologySpecimen.html"
+    click S22 "StructureDefinition-PrimaryCancerCondition.html"
+    click S23 "StructureDefinition-HistologicGrade.html"
+    click S25 "StructureDefinition-TNMStageGroup.html"
+    click S26 "StructureDefinition-TumorMarkerTest.html"
+```
+
+| Level | Section | Code | Content | Source of the code |
+|---|---|---|---|---|
+| 1 | Surgical pathology study | LOINC `11529-5` | The narrative report | NAACCR Volume V `OBR-4` |
+| 2 | Clinical history | LOINC `22636-5` | Text | NAACCR Volume V `OBX-3` |
+| 2 | Site of origin | LOINC `22633-2` | Text; entry Cancer Pathology Specimen | NAACCR Volume V `OBX-3` |
+| 2 | Gross description | LOINC `22634-0` | Text | NAACCR Volume V `OBX-3` |
+| 2 | Microscopic observation | LOINC `22635-7` | Text | NAACCR Volume V `OBX-3` |
+| 2 | Final diagnosis | LOINC `22637-3` | Text (COSD pCR1020 report text); entry Primary Cancer Condition | NAACCR Volume V `OBX-3` |
+| 1 | Pathology synoptic report | LOINC `60568-3` | The COSD Pathology core content | NAACCR Volume V `OBR-4` |
+| 2 | Specimen, Diagnosis, Tumour, Lymph nodes, Pathological stage, Biomarkers | **Not yet assigned** - the groups of the [logical model](StructureDefinition-PathologyReport.html) | Entries: the [result profiles](#results) | US IG uses licensed CAP eCP section codes; COSD has no section codes. Local codes would be needed |
+| 1 | Annotations | LOINC `48767-8` | Text only, no entries | `Composition-eu-lab` |
+{:.grid}
+
+**Points to note**
+
+- `Composition-eu-lab` binds `category` (specialty) to a value set that has
+  *General pathology* but not *Histopathology* (SNOMED CT `394597005`), and its
+  study types have no pathology study, so *Laboratory studies (set)* is used, as
+  in the US example. HL7 Europe Laboratory excludes histopathology from its scope.
+- The US IG puts the checklist structure inside the entries (section Observations
+  with `hasMember`). The layout above instead uses EU-style second-level sections
+  for the COSD groups, so each entry is one of the result profiles directly.
+- The structured entries are the **same resources** the `DiagnosticReport`
+  references, so a receiver can use either view.
+
 ### Examples
 
 <div class="alert alert-warning" role="alert">
