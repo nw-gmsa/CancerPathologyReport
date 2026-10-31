@@ -45,6 +45,7 @@ scope.
 | [HL7 US Cancer Pathology Data Sharing](https://hl7.org/fhir/us/cancer-reporting/index.html) | 2.0.0 (STU2) | The overall aim and the pathology Diagnostic Report pattern |
 | [HL7 Europe Common Cancer Model](https://build.fhir.org/ig/hl7-eu/cancer-common/) | 1.0.0-ballot | European cancer diagnosis model (`CancerConditionAtDiagnosis`) |
 | [Royal College of Pathologists cancer datasets](https://www.rcpath.org/profession/guidelines/cancer-datasets-and-tissue-pathways.html) | - | COSD Pathology v5 is aligned with the RCPath core datasets |
+| [NAACCR Volume V - Laboratory Electronic Pathology Reporting](https://www.naaccr.org/pathology-laboratory-electronic-reporting/) | 5.1 | HL7 v2.5.1 `ORU_R01` structure for cancer pathology, applied by analogy - see [LAB-3](LAB-3.html) |
 | [LOINC](https://loinc.org/) | 2.83 | Observation codes, checked on tx.fhir.org |
 {:.grid}
 
