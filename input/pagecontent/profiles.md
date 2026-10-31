@@ -1,3 +1,11 @@
+<div class="alert alert-danger" role="alert">
+<b>Proof of concept.</b> This implementation guide is a demonstration only. It is
+<b>not</b> an authoritative source, is not endorsed by NHS England, the National
+Disease Registration Service or HL7, and must not be used for implementation or
+clinical purposes. The authoritative source for COSD Pathology is the
+<a href="https://nhsd-proxy.openprescribing.net/ndrs/data/data-sets/cosd/cosd-pathology-user-guide-v5.0/core---pathology">COSD Pathology User Guide</a>.
+</div>
+
 Profiles are built on HL7 Europe Base and HL7 Europe Laboratory. Where
 [mCODE](https://hl7.org/fhir/us/mcode/) (STU4) has a profile for the same
 content, the profile here takes the mCODE name and structure, so the two can be

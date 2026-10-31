@@ -1,5 +1,9 @@
 <div class="alert alert-danger" role="alert">
-This is for information/analysis purposes only and is not a planned piece of work.
+<b>Proof of concept.</b> This implementation guide is a demonstration only. It is
+<b>not</b> an authoritative source, is not endorsed by NHS England, the National
+Disease Registration Service or HL7, and must not be used for implementation or
+clinical purposes. The authoritative source for COSD Pathology is the
+<a href="https://nhsd-proxy.openprescribing.net/ndrs/data/data-sets/cosd/cosd-pathology-user-guide-v5.0/core---pathology">COSD Pathology User Guide</a>.
 </div>
 
 ### Aim
@@ -21,6 +25,8 @@ scope.
 
 ### Content
 
+- [Cancer Pathology Report](PathologyReport.html) - the report's domain archetype
+  and detailed model, with COSD, HL7 v2 and FHIR mappings
 - [Pathology Report](StructureDefinition-PathologyReport.html) - logical model of the
   COSD Pathology (v5) **Core - Pathology** content, with an entity relationship
   diagram and mappings to COSD and to the profiles in this guide

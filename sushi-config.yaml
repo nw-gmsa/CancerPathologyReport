@@ -3,10 +3,11 @@ id: fhir.nwgenomics.nhs.uk.cancerpathologyreport
 canonical: https://fhir.nwgenomics.nhs.uk/CancerPathologyReport
 version: 0.1.0
 name: CancerPathologyReport
-title: Cancer Pathology Report
-description: Structured cancer pathology reports based on COSD Pathology (v5), built on HL7 Europe Base and Laboratory, aligned with mCODE
-releaseLabel: ci-build
+title: Cancer Pathology Report (Proof of Concept)
+description: PROOF OF CONCEPT ONLY - not an authoritative source. Structured cancer pathology reports based on COSD Pathology (v5), built on HL7 Europe Base and Laboratory, aligned with mCODE
+releaseLabel: proof-of-concept
 status: draft
+experimental: true
 publisher:
   - name: NHS North West Genomics
   - url: https://www.nwgenomics.nhs.uk/contact-us
@@ -33,6 +34,27 @@ pages:
   index.md:
     title: Home
     generation: markdown
+  LTW.md:
+    title: Laboratory Testing Workflow (LTW)
+    generation: markdown
+  ILW.md:
+    title: Inter-Laboratory Workflow (ILW)
+    generation: markdown
+  LAB-1.md:
+    title: Placer Order Management [LAB-1]
+    generation: markdown
+  LAB-3.md:
+    title: Order Results Management [LAB-3]
+    generation: markdown
+  LAB-35.md:
+    title: Sub-order Management [LAB-35]
+    generation: markdown
+  LAB-36.md:
+    title: Sub-order Results Delivery [LAB-36]
+    generation: markdown
+  PathologyReport.md:
+    title: Cancer Pathology Report
+    generation: markdown
   profiles.md:
     title: Profiles
     generation: markdown
@@ -42,7 +64,17 @@ pages:
 
 menu:
   Home: index.html
-  Logical Model: StructureDefinition-PathologyReport.html
-  Profiles: profiles.html
-  Terminology: terminology.html
+  Analysis and Design (Volume 1):
+    Laboratory Testing Workflow (LTW): LTW.html
+    Inter-Laboratory Workflow (ILW): ILW.html
+  Interactions (Volume 2):
+    Placer Order Management [LAB-1]: LAB-1.html
+    Order Results Management [LAB-3]: LAB-3.html
+    Sub-order Management [LAB-35]: LAB-35.html
+    Sub-order Results Delivery [LAB-36]: LAB-36.html
+  Data Models (Volume 3):
+    Cancer Pathology Report: PathologyReport.html
+    Logical Model: StructureDefinition-PathologyReport.html
+    Profiles: profiles.html
+    Terminology: terminology.html
   Artifacts: artifacts.html

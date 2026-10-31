@@ -2,7 +2,7 @@ Logical:        PathologyReport
 Id:             PathologyReport
 Title:          "Pathology Report"
 Description:    """
-**This logical model is a proposal, not an active or planned project.**
+**Proof of concept - not an authoritative source.**
 
 The structured content of a cancer pathology report, based only on the
 [COSD Pathology](https://nhsd-proxy.openprescribing.net/ndrs/data/data-sets/cosd/cosd-pathology-user-guide-v5.0/core---pathology)
@@ -19,6 +19,7 @@ Characteristics: #can-be-target
 
 // General report information
 
+* ^experimental = true
 * reportIdentifier 0..1 Identifier "Service Report Identifier" "Unique identifier of the pathology report (pCR0950)"
 * observationReportIdentifier 0..1 Identifier "Pathology Observation Report Identifier" "Local identifier of the observation report (pCR6220)"
 * reportStatus 1..1 CodeableConcept "Service Report Status" "1 Final, 2 Preliminary, 3 Test not available, 4 Unspecified, 5 Supplementary/second opinion, 6 Deleted (pCR0960)"

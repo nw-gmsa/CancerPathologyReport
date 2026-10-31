@@ -17,11 +17,14 @@ Parent:         http://hl7.eu/fhir/laboratory/StructureDefinition/DiagnosticRepo
 Id:             CancerPathologyDiagnosticReport
 Title:          "Cancer Pathology Diagnostic Report"
 Description:    """
+**Proof of concept - not an authoritative source.**
+
 A cancer pathology report, carrying the COSD Pathology core content as coded
 results. Based on HL7 Europe Laboratory `DiagnosticReport-eu-lab`. Plays the same
 role as the US Pathology Diagnostic Report in the HL7 US Cancer Pathology Data
 Sharing IG; mCODE has no equivalent profile.
 """
+* ^experimental = true
 * identifier MS
 * identifier ^short = "Service Report Identifier (pCR0950)"
 * status MS
@@ -45,9 +48,12 @@ Parent:         http://hl7.eu/fhir/laboratory/StructureDefinition/Specimen-eu-la
 Id:             CancerPathologySpecimen
 Title:          "Cancer Pathology Specimen"
 Description:    """
+**Proof of concept - not an authoritative source.**
+
 The specimen a cancer pathology report is about. Based on HL7 Europe Laboratory
 `Specimen-eu-lab`, aligned with the mCODE [Human Specimen](https://hl7.org/fhir/us/mcode/StructureDefinition-mcode-human-specimen.html) profile.
 """
+* ^experimental = true
 * identifier MS
 * type MS
 * type ^short = "Specimen Nature (pCR0970) - primary tumour, lymph node, metastatic site"
@@ -73,10 +79,13 @@ Parent:         http://hl7.eu/fhir/base/StructureDefinition/condition-eu-core
 Id:             PrimaryCancerCondition
 Title:          "Primary Cancer Condition"
 Description:    """
+**Proof of concept - not an authoritative source.**
+
 The cancer diagnosis recorded by the pathology report. Based on HL7 Europe Base
 `condition-eu-core`, aligned with the mCODE [Primary Cancer Condition](https://hl7.org/fhir/us/mcode/StructureDefinition-mcode-primary-cancer-condition.html)
 profile and the HL7 Europe Common Cancer Model `CancerConditionAtDiagnosis`.
 """
+* ^experimental = true
 * code MS
 * code ^short = "Diagnosis (ICD Pathological) (pCR0810), or SNOMED CT"
 * code from CancerDiagnosis (preferred)
@@ -95,10 +104,13 @@ Parent:         http://hl7.eu/fhir/laboratory/StructureDefinition/Observation-re
 Id:             HistologicBehaviorAndType
 Title:          "Histologic Behavior and Type"
 Description:    """
+**Proof of concept - not an authoritative source.**
+
 Tumour morphology - histological type and behaviour. Aligned with the mCODE
 [Histologic Behavior and Type](https://hl7.org/fhir/us/mcode/StructureDefinition-mcode-histologic-behavior-and-type.html) profile.
 COSD Morphology (SNOMED) (pCR6420).
 """
+* ^experimental = true
 * insert CancerPathologyObservation
 * code = $loinc#31206-6 "Behavior ICD-O-3 Cancer"
 * value[x] 1..1 MS
@@ -111,11 +123,14 @@ Parent:         http://hl7.eu/fhir/laboratory/StructureDefinition/Observation-re
 Id:             HistologicGrade
 Title:          "Histologic Grade"
 Description:    """
+**Proof of concept - not an authoritative source.**
+
 Histological grade of the tumour. Aligned with the mCODE
 [Histologic Grade](https://hl7.org/fhir/us/mcode/StructureDefinition-mcode-histologic-grade.html) profile.
 mCODE codes this with NCI Thesaurus C18000; LOINC is used here. COSD Grade of
 Differentiation (Pathological) (pCR0860).
 """
+* ^experimental = true
 * insert CancerPathologyObservation
 * code = $loinc#33732-9 "Histology grade [Identifier] in Cancer specimen"
 * value[x] 1..1 MS
@@ -130,10 +145,13 @@ Parent:         http://hl7.eu/fhir/laboratory/StructureDefinition/Observation-re
 Id:             TumorSize
 Title:          "Tumor Size"
 Description:    """
+**Proof of concept - not an authoritative source.**
+
 Size of the tumour. Aligned with the mCODE
 [Tumor Size](https://hl7.org/fhir/us/mcode/StructureDefinition-mcode-tumor-size.html) profile.
 COSD Lesion Size (Pathological) (pCR0830).
 """
+* ^experimental = true
 * insert CancerPathologyObservation
 * code = $loinc#21889-1 "Size Tumor"
 * value[x] 1..1 MS
@@ -157,10 +175,13 @@ Parent:         http://hl7.eu/fhir/laboratory/StructureDefinition/Observation-re
 Id:             TNMPrimaryTumorCategory
 Title:          "TNM Primary Tumor Category"
 Description:    """
+**Proof of concept - not an authoritative source.**
+
 Pathological T category. Aligned with the mCODE
 [TNM Primary Tumor Category](https://hl7.org/fhir/us/mcode/StructureDefinition-mcode-tnm-primary-tumor-category.html) profile,
 restricted to the pathological code. COSD T Category (Pathological) (pCR0910).
 """
+* ^experimental = true
 * insert TNMObservation
 * code = $loinc#21899-0 "Primary tumor.pathology Cancer"
 
@@ -169,10 +190,13 @@ Parent:         http://hl7.eu/fhir/laboratory/StructureDefinition/Observation-re
 Id:             TNMRegionalNodesCategory
 Title:          "TNM Regional Nodes Category"
 Description:    """
+**Proof of concept - not an authoritative source.**
+
 Pathological N category. Aligned with the mCODE
 [TNM Regional Nodes Category](https://hl7.org/fhir/us/mcode/StructureDefinition-mcode-tnm-regional-nodes-category.html) profile,
 restricted to the pathological code. COSD N Category (Pathological) (pCR0920).
 """
+* ^experimental = true
 * insert TNMObservation
 * code = $loinc#21900-6 "Regional lymph nodes.pathology [Class] Cancer"
 
@@ -181,10 +205,13 @@ Parent:         http://hl7.eu/fhir/laboratory/StructureDefinition/Observation-re
 Id:             TNMDistantMetastasesCategory
 Title:          "TNM Distant Metastases Category"
 Description:    """
+**Proof of concept - not an authoritative source.**
+
 Pathological M category. Aligned with the mCODE
 [TNM Distant Metastases Category](https://hl7.org/fhir/us/mcode/StructureDefinition-mcode-tnm-distant-metastases-category.html) profile,
 restricted to the pathological code. COSD M Category (Pathological) (pCR0930).
 """
+* ^experimental = true
 * insert TNMObservation
 * code = $loinc#21901-4 "Distant metastases.pathology [Class] Cancer"
 
@@ -193,10 +220,13 @@ Parent:         http://hl7.eu/fhir/laboratory/StructureDefinition/Observation-re
 Id:             TNMStageGroup
 Title:          "TNM Stage Group"
 Description:    """
+**Proof of concept - not an authoritative source.**
+
 Pathological TNM stage group. Aligned with the mCODE
 [TNM Stage Group](https://hl7.org/fhir/us/mcode/StructureDefinition-mcode-tnm-stage-group.html) profile,
 restricted to the pathological code. COSD TNM Stage Grouping (Pathological) (pCR0940).
 """
+* ^experimental = true
 * insert TNMObservation
 * code = $loinc#21902-2 "Stage group.pathology Cancer"
 * hasMember MS
@@ -206,8 +236,9 @@ restricted to the pathological code. COSD TNM Stage Grouping (Pathological) (pCR
 Extension:      NeoadjuvantTherapyIndicator
 Id:             NeoadjuvantTherapyIndicator
 Title:          "Neoadjuvant Therapy Indicator"
-Description:    "Whether the stage was recorded after treatment given before surgery. COSD Neoadjuvant Therapy Indicator (pCR1000). No mCODE equivalent."
+Description:    "Proof of concept - not an authoritative source. Whether the stage was recorded after treatment given before surgery. COSD Neoadjuvant Therapy Indicator (pCR1000). No mCODE equivalent."
 Context:        Observation
+* ^experimental = true
 * value[x] only CodeableConcept
 * value[x] from COSDNeoadjuvantTherapyIndicator (required)
 
@@ -218,12 +249,15 @@ Parent:         http://hl7.eu/fhir/laboratory/StructureDefinition/Observation-re
 Id:             TumorMarkerTest
 Title:          "Tumor Marker Test"
 Description:    """
+**Proof of concept - not an authoritative source.**
+
 Result of a tumour marker test by immunohistochemistry (IHC). Aligned with the
 mCODE [Tumor Marker Test](https://hl7.org/fhir/us/mcode/StructureDefinition-mcode-tumor-marker-test.html) profile.
 Covers the COSD Pathology core biomarkers: Ki-67 (pCR7000/pCR7010) and mismatch
 repair (MMR) protein expression (pCR7020-pCR7050). Loss of MMR expression is the
 trigger for the Lynch syndrome reflex order to genomics.
 """
+* ^experimental = true
 * insert CancerPathologyObservation
 * code from CancerPathologyTumorMarkerTest (extensible)
 * value[x] 1..1 MS
@@ -235,7 +269,7 @@ trigger for the Lynch syndrome reflex order to genomics.
 ValueSet:       CancerPathologyTumorMarkerTest
 Id:             CancerPathologyTumorMarkerTest
 Title:          "Cancer Pathology Tumor Marker Test"
-Description:    "Tumour marker tests in COSD Pathology core."
+Description:    "Proof of concept - not an authoritative source. Tumour marker tests in COSD Pathology core."
 * $loinc#29593-1 "Cells.Ki-67 nuclear Ag/cells in Tissue by Immune stain"
 * $loinc#81691-8 "MLH-1 Ag [Presence] in Cancer specimen by Immune stain"
 * $loinc#81694-2 "PMS2 Ag [Presence] in Cancer specimen by Immune stain"

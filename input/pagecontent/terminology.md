@@ -1,3 +1,11 @@
+<div class="alert alert-danger" role="alert">
+<b>Proof of concept.</b> This implementation guide is a demonstration only. It is
+<b>not</b> an authoritative source, is not endorsed by NHS England, the National
+Disease Registration Service or HL7, and must not be used for implementation or
+clinical purposes. The authoritative source for COSD Pathology is the
+<a href="https://nhsd-proxy.openprescribing.net/ndrs/data/data-sets/cosd/cosd-pathology-user-guide-v5.0/core---pathology">COSD Pathology User Guide</a>.
+</div>
+
 COSD Pathology does not publish FHIR terminology. This guide defines it from
 the [COSD Pathology User Guide v5](https://nhsd-proxy.openprescribing.net/ndrs/data/data-sets/cosd/cosd-pathology-user-guide-v5.0/core---pathology).
 
