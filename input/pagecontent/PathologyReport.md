@@ -241,6 +241,88 @@ each with a fixed LOINC code where one exists:
 | Invasion, margins, synchronous tumour, lymph nodes | `Observation-resultslab-eu-lab` | Not yet assigned | None |
 {:.grid}
 
+#### Profile relationships
+
+How the result profiles relate to each other, the report, the specimen and the
+diagnosis - in the style of the mCODE
+[profile overview diagram](https://build.fhir.org/ig/HL7/fhir-mCODE-ig/). Arrow
+labels are the FHIR elements that hold the reference. Every Observation also has
+`subject` (Patient) and `specimen` (Cancer Pathology Specimen), which are left
+off the diagram to keep it readable. Dashed arrows are optional links used by
+mCODE that the profiles here do not constrain. Click a box to open its profile.
+
+```mermaid
+flowchart LR
+    PAT["Patient<br/>(EU core)"]
+    REQ["ServiceRequest"]
+
+    subgraph Report["Report"]
+        DR["Cancer Pathology<br/>Diagnostic Report"]
+        SPEC["Cancer Pathology<br/>Specimen"]
+    end
+
+    subgraph Disease["Disease characterisation"]
+        PCC["Primary Cancer<br/>Condition"]
+        HBT["Histologic Behavior<br/>and Type"]
+        HG["Histologic Grade"]
+        TS["Tumor Size"]
+    end
+
+    subgraph Staging["Pathological TNM stage"]
+        SG["TNM Stage Group"]
+        T["TNM Primary<br/>Tumor Category"]
+        N["TNM Regional<br/>Nodes Category"]
+        M["TNM Distant<br/>Metastases Category"]
+        NEO["Neoadjuvant Therapy<br/>Indicator (extension)"]
+    end
+
+    subgraph Biomarkers["Biomarkers"]
+        TMT["Tumor Marker Test<br/>(Ki-67, MLH1, PMS2,<br/>MSH2, MSH6)"]
+    end
+
+    DR -->|subject| PAT
+    DR -.->|basedOn| REQ
+    DR -->|specimen| SPEC
+    SPEC -->|subject| PAT
+    DR -->|result| HBT
+    DR -->|result| HG
+    DR -->|result| TS
+    DR -->|result| SG
+    DR -->|result| TMT
+
+    PCC -->|subject| PAT
+    PCC -->|evidence.detail| HBT
+    PCC -->|evidence.detail| HG
+    PCC -->|stage.assessment| SG
+
+    SG -->|hasMember| T
+    SG -->|hasMember| N
+    SG -->|hasMember| M
+    SG --- NEO
+
+    TS -.->|focus| PCC
+    TMT -.->|focus| PCC
+
+    click DR "StructureDefinition-CancerPathologyDiagnosticReport.html"
+    click SPEC "StructureDefinition-CancerPathologySpecimen.html"
+    click PCC "StructureDefinition-PrimaryCancerCondition.html"
+    click HBT "StructureDefinition-HistologicBehaviorAndType.html"
+    click HG "StructureDefinition-HistologicGrade.html"
+    click TS "StructureDefinition-TumorSize.html"
+    click SG "StructureDefinition-TNMStageGroup.html"
+    click T "StructureDefinition-TNMPrimaryTumorCategory.html"
+    click N "StructureDefinition-TNMRegionalNodesCategory.html"
+    click M "StructureDefinition-TNMDistantMetastasesCategory.html"
+    click NEO "StructureDefinition-NeoadjuvantTherapyIndicator.html"
+    click TMT "StructureDefinition-TumorMarkerTest.html"
+```
+
+`DiagnosticReport.result` may also reference the TNM category Observations
+directly, and the COSD items with no mCODE profile (invasion, margins,
+synchronous tumour, lymph nodes) as plain `Observation-resultslab-eu-lab` results.
+
+#### Report flow
+
 ```mermaid
 flowchart LR
     LIMS["Pathology LIMS<br/>(report authorised)"]
