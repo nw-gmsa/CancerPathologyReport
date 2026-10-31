@@ -419,6 +419,138 @@ flowchart TB
 | 1 | Annotations | LOINC `48767-8` | Text only, no entries | `Composition-eu-lab` |
 {:.grid}
 
+#### What the reader sees
+
+A FHIR Document is a real document. Every section carries its own
+human-readable narrative (`Composition.section.text`), and a viewer shows those
+narratives in order, top to bottom, like the pages of a printed report. The
+coded entries sit behind the narrative for computers to use, but **the reader
+never needs to see them**.
+
+The mock below is a fictitious colorectal cancer report, laid out the way a
+document viewer would show it. The synoptic part follows the
+question-and-answer style of the US
+[Cancer Pathology Observation Example](https://build.fhir.org/ig/HL7/cancer-reporting/cancer_pathology_observation_example.html).
+The small grey labels show which part of the FHIR Document each block comes
+from - a real viewer would not show them.
+
+<div style="border:1px solid #bbb; box-shadow:0 2px 8px rgba(0,0,0,0.15); background:#fff; color:#222; max-width:820px; margin:16px auto; padding:28px 36px; font-family:Georgia,'Times New Roman',serif; font-size:15px; line-height:1.5;">
+
+<div style="font-family:Arial,sans-serif; font-size:11px; color:#888; text-align:right;">Composition.title &middot; type LOINC 60567-5</div>
+<div style="display:flex; justify-content:space-between; align-items:flex-start; border-bottom:2px solid #333; padding-bottom:8px; margin-bottom:12px;">
+  <div>
+    <div style="font-size:22px; font-weight:bold;">Histopathology Report</div>
+    <div>Example Pathology Laboratory (ODS X99XX)</div>
+  </div>
+  <div style="font-family:Arial,sans-serif; font-size:12px; color:#c00; font-weight:bold; border:1px solid #c00; padding:2px 6px;">FICTITIOUS EXAMPLE</div>
+</div>
+
+<div style="font-family:Arial,sans-serif; font-size:11px; color:#888;">Composition.subject (Patient) &middot; Composition.identifier &middot; Composition.date &middot; Composition.status</div>
+<table style="width:100%; font-size:14px; margin-bottom:14px; border:none;">
+<tr><td style="border:none; padding:2px 8px 2px 0;"><b>Patient</b></td><td style="border:none;">EXAMPLE, Alex</td><td style="border:none;"><b>NHS Number</b></td><td style="border:none;">999 000 0001</td></tr>
+<tr><td style="border:none; padding:2px 8px 2px 0;"><b>Date of birth</b></td><td style="border:none;">01-Jan-1960</td><td style="border:none;"><b>Report number</b></td><td style="border:none;">H26-012345</td></tr>
+<tr><td style="border:none; padding:2px 8px 2px 0;"><b>Requested by</b></td><td style="border:none;">Dr A Surgeon, Colorectal Surgery</td><td style="border:none;"><b>Report status</b></td><td style="border:none;">Final</td></tr>
+<tr><td style="border:none; padding:2px 8px 2px 0;"><b>Collected</b></td><td style="border:none;">14-Sep-2026</td><td style="border:none;"><b>Authorised</b></td><td style="border:none;">21-Sep-2026</td></tr>
+</table>
+
+<div style="font-family:Arial,sans-serif; font-size:11px; color:#888;">Composition.section &middot; Surgical pathology study (LOINC 11529-5)</div>
+<div style="font-size:17px; font-weight:bold; border-bottom:1px solid #999; margin:10px 0 6px;">Report</div>
+
+<div style="font-family:Arial,sans-serif; font-size:11px; color:#888;">section &middot; Clinical history (22636-5) &middot; section.text</div>
+<p style="margin:2px 0 10px;"><b>Clinical history.</b> Caecal mass found at colonoscopy; biopsy showed adenocarcinoma. Right hemicolectomy.</p>
+
+<div style="font-family:Arial,sans-serif; font-size:11px; color:#888;">section &middot; Site of origin (22633-2) &middot; section.text, entry Specimen</div>
+<p style="margin:2px 0 10px;"><b>Specimen.</b> Right hemicolectomy, received fresh, labelled with the patient's details.</p>
+
+<div style="font-family:Arial,sans-serif; font-size:11px; color:#888;">section &middot; Gross description (22634-0) &middot; section.text</div>
+<p style="margin:2px 0 10px;"><b>Macroscopic description.</b> Right hemicolectomy, 260 mm of large bowel with 60 mm of terminal ileum. An ulcerated tumour, 45 mm in maximum dimension, is present in the caecum, 30 mm from the ileocaecal valve. The tumour is 80 mm from the nearest longitudinal margin.</p>
+
+<div style="font-family:Arial,sans-serif; font-size:11px; color:#888;">section &middot; Microscopic observation (22635-7) &middot; section.text</div>
+<p style="margin:2px 0 10px;"><b>Microscopic description.</b> Moderately differentiated adenocarcinoma, invading through the muscularis propria into the pericolic fat. Vascular invasion is present. No perineural invasion is seen. All margins are clear. Two of eighteen lymph nodes contain metastatic carcinoma. Immunohistochemistry shows loss of nuclear expression of MLH1 and PMS2, with retained MSH2 and MSH6.</p>
+
+<div style="font-family:Arial,sans-serif; font-size:11px; color:#888;">section &middot; Final diagnosis (22637-3) &middot; section.text, entry Primary Cancer Condition</div>
+<div style="border:1px solid #999; background:#f6f6f6; padding:6px 10px; margin:2px 0 14px;"><b>Diagnosis.</b> Caecum, right hemicolectomy: adenocarcinoma, moderately differentiated, pT3 pN1b. Mismatch repair deficient (loss of MLH1/PMS2).</div>
+
+<div style="font-family:Arial,sans-serif; font-size:11px; color:#888;">Composition.section &middot; Pathology synoptic report (LOINC 60568-3) &middot; COSD Pathology core</div>
+<div style="font-size:17px; font-weight:bold; border-bottom:1px solid #999; margin:14px 0 6px;">Cancer Data Summary</div>
+
+<div style="font-family:Arial,sans-serif; font-size:11px; color:#888;">section &middot; Specimen &middot; entry Cancer Pathology Specimen</div>
+<div style="font-weight:bold; margin-top:4px;">SPECIMEN</div>
+<div style="margin-left:20px;">
+Specimen nature: <b>Primary tumour</b><br/>
+Investigation type: <b>Radical excision</b><br/>
+Sample collection date: <b>14-Sep-2026</b> &nbsp; Sample receipt date: <b>14-Sep-2026</b>
+</div>
+
+<div style="font-family:Arial,sans-serif; font-size:11px; color:#888; margin-top:8px;">section &middot; Diagnosis &middot; entries Primary Cancer Condition, Histologic Behavior and Type</div>
+<div style="font-weight:bold;">DIAGNOSIS</div>
+<div style="margin-left:20px;">
+Topography: <b>Caecum</b> (SNOMED CT 32713005)<br/>
+Morphology: <b>Adenocarcinoma</b> (SNOMED CT 35917007)<br/>
+Diagnosis: <b>C18.0 Malignant neoplasm of caecum</b> (ICD-10)<br/>
+Laterality: <b>Not applicable</b>
+</div>
+
+<div style="font-family:Arial,sans-serif; font-size:11px; color:#888; margin-top:8px;">section &middot; Tumour &middot; entries Histologic Grade, Tumor Size, other results</div>
+<div style="font-weight:bold;">TUMOUR</div>
+<div style="margin-left:20px;">
+Grade of differentiation: <b>G2 Moderately differentiated</b><br/>
+Lesion size: <b>45 mm</b><br/>
+Vascular or lymphatic invasion: <b>Yes - vascular invasion only</b><br/>
+Perineural invasion: <b>Not identified</b><br/>
+Excision margin: <b>Clear (tumour more than 5 mm from margin)</b><br/>
+Circumferential margin: <b>Not involved</b><br/>
+Synchronous tumour: <b>Not present</b>
+</div>
+
+<div style="font-family:Arial,sans-serif; font-size:11px; color:#888; margin-top:8px;">section &middot; Lymph nodes &middot; entries lymph node results</div>
+<div style="font-weight:bold;">LYMPH NODES</div>
+<div style="margin-left:20px;">
+Nodes examined: <b>18</b> &nbsp; Nodes positive: <b>2</b>
+</div>
+
+<div style="font-family:Arial,sans-serif; font-size:11px; color:#888; margin-top:8px;">section &middot; Pathological stage &middot; entries TNM Stage Group, T, N, M</div>
+<div style="font-weight:bold;">PATHOLOGICAL STAGE (UICC TNM 8)</div>
+<div style="margin-left:20px;">
+Primary tumour: <b>pT3</b> &nbsp; Regional nodes: <b>pN1b</b> &nbsp; Distant metastases: <b>not assessed</b><br/>
+Neoadjuvant therapy: <b>No</b>
+</div>
+
+<div style="font-family:Arial,sans-serif; font-size:11px; color:#888; margin-top:8px;">section &middot; Biomarkers &middot; entries Tumor Marker Test</div>
+<div style="font-weight:bold;">BIOMARKERS (IMMUNOHISTOCHEMISTRY)</div>
+<div style="margin-left:20px;">
+MLH1 nuclear expression intact: <b style="color:#c00;">No - lost</b><br/>
+PMS2 nuclear expression intact: <b style="color:#c00;">No - lost</b><br/>
+MSH2 nuclear expression intact: <b>Yes</b><br/>
+MSH6 nuclear expression intact: <b>Yes</b><br/>
+Ki-67: <b>Not done</b>
+</div>
+
+<div style="font-family:Arial,sans-serif; font-size:11px; color:#888; margin-top:14px;">Composition.section &middot; Annotations (LOINC 48767-8) &middot; section.text only</div>
+<div style="font-size:17px; font-weight:bold; border-bottom:1px solid #999; margin:4px 0 6px;">Comments</div>
+<p style="margin:2px 0 14px;">Loss of MLH1 and PMS2 may be sporadic or due to Lynch syndrome. BRAF V600E and MLH1 promoter hypermethylation testing has been requested from the genomics laboratory as a reflex test. Results will be reported separately.</p>
+
+<div style="font-family:Arial,sans-serif; font-size:11px; color:#888;">Composition.author (PractitionerRole) &middot; Composition.attester &middot; Composition.custodian (Organization)</div>
+<div style="border-top:1px solid #333; padding-top:6px; font-size:14px;">
+Reported by: <b>Dr P Pathologist</b>, Consultant Histopathologist (GMC 0000000)<br/>
+Authorised: 21-Sep-2026 16:42 &nbsp;&middot;&nbsp; Example Pathology Laboratory
+</div>
+
+</div>
+
+**Reading the mock**
+
+- The **header** (patient, report number, dates, requester) comes from the
+  `Composition` itself and its `subject`, not from a section.
+- Each heading and paragraph is one `Composition.section`, shown from its
+  `section.text`. The order of the sections is the order of the document.
+- The **Cancer Data Summary** is the same COSD content as the coded results in the
+  [Detailed Model](#detailed-model). In the document, each sub-heading is a
+  second-level section whose `text` is the question-and-answer list shown, and
+  whose `entry` references the coded Observations behind it.
+- The **sign-off** comes from `Composition.author`, `attester` and `custodian`.
+  A FHIR Document is a fixed, attested record, like a signed letter.
+
 **Points to note**
 
 - `Composition-eu-lab` binds `category` (specialty) to a value set that has
