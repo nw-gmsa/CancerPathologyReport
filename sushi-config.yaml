@@ -1,0 +1,44 @@
+# sushi-config.yaml is documented https://fshschool.org/docs/sushi/configuration/
+id: fhir.nwgenomics.nhs.uk.cancerpathologyreport
+canonical: https://fhir.nwgenomics.nhs.uk/CancerPathologyReport
+version: 0.1.0
+name: CancerPathologyReport
+title: Cancer Pathology Report
+description: Structured cancer pathology reports based on COSD Pathology (v5), built on HL7 Europe Base and Laboratory, aligned with mCODE
+releaseLabel: ci-build
+status: draft
+publisher:
+  - name: NHS North West Genomics
+  - url: https://www.nwgenomics.nhs.uk/contact-us
+license: CC-BY-4.0
+fhirVersion: 4.0.1
+jurisdiction: urn:iso:std:iso:3166#GB "United Kingdom of Great Britain and Northern Ireland"
+copyrightYear: 2026+
+
+dependencies:
+  hl7.fhir.eu.base: 2.0.1
+  hl7.fhir.eu.laboratory: 2.1.0
+  hl7.fhir.eu.extensions.r4: 1.3.1
+  hl7.fhir.extensions.r5: 4.0.1
+
+FSHOnly: false
+parameters:
+  shownav: true
+  apply-contact: 'true'
+  apply-jurisdiction: 'true'
+  apply-publisher: 'true'
+  apply-version: 'true'
+
+pages:
+  index.md:
+    title: Home
+    generation: markdown
+  profiles.md:
+    title: Profiles
+    generation: markdown
+
+menu:
+  Home: index.html
+  Logical Model: StructureDefinition-PathologyReport.html
+  Profiles: profiles.html
+  Artifacts: artifacts.html
