@@ -2,7 +2,7 @@
 
 Proof-of-concept FHIR Implementation Guide for a structured cancer pathology
 report, based on COSD Pathology v5 Core - Pathology. Published at
-https://nw-gmsa.github.io/CancerPathologyReport/. Supports the NW GMSA Pathology to
+https://kevinmayfield.github.io/CancerPathologyReport/. Supports the NW GMSA Pathology to
 Genomics Reflex use case.
 
 ## Scope

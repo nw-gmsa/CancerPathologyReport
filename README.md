@@ -4,7 +4,7 @@
 
 FHIR logical model of a cancer pathology report, based on COSD Pathology (v5) Core - Pathology.
 
-Published at https://nw-gmsa.github.io/CancerPathologyReport/. Used by the
+Published at https://kevinmayfield.github.io/CancerPathologyReport/. Used by the
 [Pathology to Genomics Reflex](https://nw-gmsa.github.io/use-cases/PathologyToGenomicsReflex.html) use case.
 
 - FSH source: `input/fsh/PathologyReport.fsh`
