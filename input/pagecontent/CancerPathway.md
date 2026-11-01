@@ -17,38 +17,34 @@ patterns that cover them are listed so readers know where to look.
 ### Overview
 
 ```mermaid
-flowchart LR
-    subgraph REF["Referral"]
-        A["GP / screening<br/>urgent suspected cancer"]
-    end
+flowchart TB
+    A["Referral<br/>urgent suspected cancer"]
+
     subgraph DIAG["Diagnostics"]
         B["Imaging"]
-        C["Biopsy / resection"]
-        D["Pathology<br/>Cancer Pathology Report"]
-        E["Genomics<br/>reflex order"]
+        C["Biopsy"]
+        D["Pathology report"]
+        E["Genomics"]
     end
-    subgraph DEC["Decision"]
-        F["MDT<br/>diagnosis, stage, plan"]
-    end
+
+    F["MDT<br/>diagnosis and plan"]
+
     subgraph TX["Treatment"]
         G["Surgery"]
         H["Systemic therapy"]
         I["Radiotherapy"]
     end
-    subgraph FU["Follow-up and survivorship"]
-        J["Response, recurrence,<br/>surveillance"]
-        K["PROMs<br/>Cancer Quality of Life Survey"]
-    end
 
-    A --> B --> C --> D
-    A --> C
-    D --> E --> F
+    J["Follow-up"]
+    K["PROMs"]
+
+    A --> B --> C --> D --> E
     D --> F
-    B --> F
+    E --> F
+    B -.-> F
     F --> G & H & I
-    G -->|"resection specimen"| D
-    G & H & I --> J
-    J --> K
+    G -.->|"resection specimen"| D
+    G & H & I --> J --> K
 
     classDef inscope fill:#d4edda,stroke:#155724,color:#155724
     classDef context fill:#f8f9fa,stroke:#6c757d,color:#495057
@@ -56,9 +52,11 @@ flowchart LR
     class A,B,F,G,H,I,J,K context
 ```
 
-Green: covered by this guide. Grey: context only. Surgery produces a **resection
-specimen**, which goes back to pathology for a further report - often restaging
-the cancer (pTNM, or ypTNM after neoadjuvant therapy).
+Green: covered by this guide. Grey: context only. Dotted lines: imaging also
+goes to the MDT directly, and surgery produces a **resection specimen**, which
+goes back to pathology for a further report - often restaging the cancer (pTNM,
+or ypTNM after neoadjuvant therapy). Each stage is described in
+[Pathway Stages](#pathway-stages) below.
 
 ### Pathway Stages
 
@@ -140,6 +138,72 @@ tumour size, MMR IHC - has no equivalent in the FDP Canonical Data Model. What
 tracking needs from the pathology report is the **milestone** (report authorised,
 `DiagnosticReport.issued`, pCR0780), the diagnosis it confirms, and the
 identifiers that link it to the patient's pathway.
+
+#### Where Cancer 360 gets its data
+
+NHS England's
+[Cancer 360 local DPIA template](https://www.england.nhs.uk/wp-content/uploads/2025/07/redacted-cancer-360-fdp-local-dpia-v1.0.pdf)
+(v3.0, May 2025) describes the feeds. Each trust completes it, so system names
+and refresh intervals are left for the trust to fill in. Data comes from the
+**trust's own systems**, through a direct API connection or the trust data
+warehouse, refreshed every few hours - **not** from NDRS, and not as COSD, HL7 v2
+or FHIR messages:
+
+| Trust system | Datasets |
+|---|---|
+| Cancer registry (the trust's local cancer register / tracking system) | Cancer pathways, tracking notes, MDT meetings, notes and bookings, inter-provider transfers |
+| EPR | Demographics, contact details, outpatient appointments, inpatient procedures |
+| Radiology Information System | Radiology exams, booking status, report text |
+| Histology System | Histopathology samples, histopathology diagnostic reports |
+| Pathology Results System | Test results |
+| Endoscopy Information System | Endoscopy exams, booking status, report text |
+| Oncology Information System | Cancer treatments, treatment booking status |
+{:.grid}
+
+Actions entered by staff in Cancer 360 (requests to teams, owners, due dates,
+escalations) are not written back to the source systems. The field-level
+"Cancer 360 Data Specification" is referred to but not published.
+
+- Whether the histopathology report reaches Cancer 360 as **structured** items or
+  only as report-level data is **open**. For radiology and endoscopy the template
+  says "report text".
+- The trust's local cancer register is also the system trusts typically use to
+  compile their COSD submission, so the diagnosis milestones Cancer 360 tracks
+  already originate in the trust. A structured LAB-3 report, as in this guide,
+  would be a cleaner source for them.
+- NHS England reported Cancer 360 live at Chelsea and Westminster and Royal United
+  Hospitals Bath, with University Hospitals of Derby and Burton implementing it and
+  a further 10 trusts to follow
+  ([May 2025](https://www.england.nhs.uk/long-read/nhs-expands-cancer-technology-rollout/)).
+
+### Cancer Registration (NDRS): Analytic, not Operational
+
+The National Disease Registration Service (NDRS) receives COSD, SACT and RTDS
+submissions from every trust and builds the national cancer registration. It is
+an **analytic** service - for audit, research, national clinical audits, PROMs
+sampling and official statistics - not an operational one. Its data arrives too
+late to support decisions on a patient's pathway:
+
+| Stage | When it is available | Compared with the pathway |
+|---|---|---|
+| COSD submission by the trust | Monthly, around a month after diagnosis | After the 28-day Faster Diagnosis Standard |
+| [Rapid Cancer Registration Data](https://www.natcan.org.uk/?p=1906) | Around 4 to 5 months after diagnosis, at lower quality | After the 62-day treatment standard |
+| [Full cancer registration](https://www.natcan.org.uk/?p=1906) | Around 18 to 24 months after the diagnosis cohort | Around the time of the [Cancer Quality of Life Survey](#patient-reported-outcomes) |
+| [Official statistics](https://nhsd-proxy.openprescribing.net/data-and-information/publications/statistical/cancer-registration-statistics/england-2023) | Around two years - for example 2023 diagnoses from an August 2025 data snapshot | Long after treatment |
+{:.grid}
+
+Operational uses - the clinical team, the MDT, a reflex order to genomics,
+tracking against waiting time standards - need the report when it is
+authorised. That is why this guide shares the report directly from the
+pathology laboratory, and uses COSD only to define its content - see
+[Why not use registry data?](index.html#why-not-use-registry-data).
+
+| | Operational | Analytic |
+|---|---|---|
+| Purpose | Care and pathway management for the patient now | Audit, research, statistics, outcomes |
+| Timing | Days | Months to years |
+| Examples | LAB-3 report to the EPR, LAB-35 reflex order, FDP Cancer 360 tracking | NDRS registration, NATCAN audits, Cancer Quality of Life Survey |
+{:.grid}
 
 ### Patient-Reported Outcomes
 

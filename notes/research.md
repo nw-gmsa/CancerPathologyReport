@@ -159,6 +159,18 @@ Added to `CancerPathway.md` ("Operational Tracking (FDP Cancer 360)").
   diagnosis pathway ([Digital Health, Feb 2025](https://www.digitalhealth.net/2025/02/cancer-diagnostic-pathway-tool-to-launch-on-fdp/)).
 - What tracking needs from this report: milestone (`DiagnosticReport.issued`,
   pCR0780), diagnosis, identifiers (accession number, order numbers, PPID).
+- Cancer 360 data sources (checked 2026-11-01): [local DPIA template v3.0](https://www.england.nhs.uk/wp-content/uploads/2025/07/redacted-cancer-360-fdp-local-dpia-v1.0.pdf)
+  (13 May 2025). Trust systems via direct API or trust data warehouse, refreshed
+  hourly-ish (trust fills in): local cancer registry (pathways, tracking notes,
+  MDT, IPT), EPR, RIS (report text), Histology System (histopathology samples and
+  diagnostic reports), Pathology Results System, Endoscopy (report text), Oncology
+  IS (treatments). No NDRS, COSD, HL7 or FHIR mentioned. Direct-entry actions not
+  written back. Field-level "Cancer 360 Data Specification" not published.
+- Cancer 360 sites ([NHS England, May 2025](https://www.england.nhs.uk/long-read/nhs-expands-cancer-technology-rollout/)):
+  Chelsea and Westminster, RUH Bath; Derby and Burton implementing; 10 more
+  trusts to follow. No North West trusts named.
+- **Open:** is the histopathology report fed as structured items or report-level?
+  Which local cancer register (Somerset Cancer Register, Infoflex, ...) feeds it?
 - **Open:** `Histology` object properties not found. CDM operational model
   reportedly on GitHub ([Computer Weekly](https://www.computerweekly.com/opinion/Inside-FDP-part-4-The-NHS-data-model)) - not located.
 
