@@ -23,12 +23,20 @@ A cancer pathology report, carrying the COSD Pathology core content as coded
 results. Based on HL7 Europe Laboratory `DiagnosticReport-eu-lab`. Plays the same
 role as the US Pathology Diagnostic Report in the HL7 US Cancer Pathology Data
 Sharing IG; mCODE has no equivalent profile.
+
+Follows the Royal College of Pathologists
+[minimum LIMS requirements](https://rcpath.org/asset/60CB744E%2D30CF%2D40A9%2D88327F33C0206493)
+for cancer reporting: the synoptic (coded) report in `result` and the full text
+report in `presentedForm` come from the same data entry, and later information
+(for example IHC, molecular results or a second opinion) is sent as a
+supplementary report.
 """
 * ^experimental = true
 * identifier MS
 * identifier ^short = "Service Report Identifier (pCR0950)"
 * status MS
 * status ^short = "Service Report Status (pCR0960)"
+* status ^comment = "The RCPath minimum LIMS requirements require supplementary reports for information available after the main report, such as IHC, molecular results or a second opinion (COSD pCR0960 code 5). This guide proposes sending them as an updated report with status appended; a separate addendum report is an open alternative - see LTW Report Updates."
 * subject 1..1 MS
 * subject only Reference($EuPatient)
 * issued MS
@@ -39,9 +47,10 @@ Sharing IG; mCODE has no equivalent profile.
 * specimen only Reference(CancerPathologySpecimen)
 * result MS
 * result only Reference(HistologicBehaviorAndType or HistologicGrade or TumorSize or TNMPrimaryTumorCategory or TNMRegionalNodesCategory or TNMDistantMetastasesCategory or TNMStageGroup or TumorMarkerTest or http://hl7.eu/fhir/laboratory/StructureDefinition/Observation-resultslab-eu-lab)
-* result ^short = "Coded results. COSD items without an mCODE profile (invasion, margins, lymph nodes, synchronous tumour) use Observation-resultslab-eu-lab"
+* result ^short = "Coded results (synoptic report). COSD items without an mCODE profile (invasion, margins, lymph nodes, synchronous tumour) use Observation-resultslab-eu-lab"
 * presentedForm MS
 * presentedForm ^short = "Pathology Report Text (pCR1020)"
+* presentedForm ^comment = "The full report as issued by the pathologist, including RCPath dataset items not coded in COSD. Generated from the same data entry as the coded results."
 
 Profile:        CancerPathologySpecimen
 Parent:         http://hl7.eu/fhir/laboratory/StructureDefinition/Specimen-eu-lab

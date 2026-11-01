@@ -9,6 +9,11 @@ The structured content of a cancer pathology report, based only on the
 (v5) **Core - Pathology** section - the items applicable to most tumour sites.
 Tumour site specific COSD Pathology sections are not included.
 
+COSD Pathology items are a subset of the Royal College of Pathologists (RCPath)
+[cancer datasets](https://www.rcpath.org/profession/guidelines/cancer-datasets-and-tissue-pathways.html),
+aligned with the RCPath core items, with national codes added. RCPath dataset
+items that COSD does not code are carried in the report text (pCR1020).
+
 Defined nationally by the National Disease Registration Service for reports
 sent to the cancer registry. Used here as the pathology report semantics a
 genomics laboratory needs alongside a reflex order - see [Pathology to Genomics
@@ -24,7 +29,7 @@ Characteristics: #can-be-target
 * observationReportIdentifier 0..1 Identifier "Pathology Observation Report Identifier" "Local identifier of the observation report (pCR6220)"
 * reportStatus 1..1 CodeableConcept "Service Report Status" "1 Final, 2 Preliminary, 3 Test not available, 4 Unspecified, 5 Supplementary/second opinion, 6 Deleted (pCR0960)"
 * investigationResultDate 0..1 date "Investigation Result Date" "Date the investigation was concluded, i.e. report authorised (pCR0780)"
-* reportText 0..1 string "Pathology Report Text" "Full text of the pathology report (pCR1020)"
+* reportText 0..1 string "Pathology Report Text" "Full text of the pathology report, including RCPath dataset items not coded in COSD (pCR1020)"
 
 // Who requested and who reported
 
