@@ -23,6 +23,25 @@ dataset defines the content that pathology laboratories already collect for ever
 registrable cancer report. Registry submission itself (monthly COSD XML) is out of
 scope.
 
+#### Why not use registry data?
+
+Registry data is built for audit, research and national statistics, not for
+use while a patient is on the pathway:
+
+| Stage | When it is available |
+|---|---|
+| COSD submission by the trust to NDRS | Monthly, around a month after diagnosis |
+| [Rapid Cancer Registration Data](https://www.natcan.org.uk/?p=1906) | Around 4 to 5 months after diagnosis, at lower quality - it does not match the eventual official statistics |
+| [Full cancer registration](https://www.natcan.org.uk/?p=1906) | Around 18 to 24 months after the diagnosis cohort |
+| [Official statistics](https://nhsd-proxy.openprescribing.net/data-and-information/publications/statistical/cancer-registration-statistics/england-2023) | Around two years - for example 2023 diagnoses from an August 2025 data snapshot |
+{:.grid}
+
+The delay is deliberate: it lets registration add treatment and other
+submissions and check the data. But the clinical team, the MDT and a genomics
+laboratory need the report within days of it being authorised. So this guide
+uses COSD to define the **content**, and shares it directly from the pathology
+laboratory when the report is issued - see the [Cancer Pathway](CancerPathway.html).
+
 ### Content
 
 - [Cancer Pathology Report](PathologyReport.html) - the report's domain archetype

@@ -124,6 +124,23 @@ Issue 010, 13 August 2026, ISO 15189:2022.
 - Magentus = Citadel Health + Wellbeing Software + Genie Solutions.
 - North Cumbria (North East and Cumbria network) not checked.
 
+## NDRS Data Timeliness (checked 2026-11-01)
+
+Added to `index.md` ("Why not use registry data?").
+
+| Stage | Timing | Source |
+|---|---|---|
+| COSD submission | Monthly, ~1 month behind diagnosis; clinical sign-off not mandated | [NATCAN data sources](https://www.natcan.org.uk/?p=1858), [RCP](https://rcpwebuat.rcp.ac.uk/news-and-media/news-and-opinion/why-does-it-take-so-long-to-publish-data/) |
+| Rapid Cancer Registration Data (RCRD) | ~4-5 months post diagnosis; lower quality, won't match official statistics | [NATCAN data sources and timeliness](https://www.natcan.org.uk/?p=1906) |
+| Full registration (NCRD) | ~18-24 months post diagnosis cohort | as above |
+| Official statistics | ~2 years; 2023 incidence from a 5-6 August 2025 snapshot | [Cancer Registration Statistics, England 2023](https://nhsd-proxy.openprescribing.net/data-and-information/publications/statistical/cancer-registration-statistics/england-2023) |
+
+- Lesion size and TNM items often only partly populated in registry data (NATCAN).
+- NDRS runs a daily COSD submission monitoring dashboard and monthly feedback
+  reports to provider cancer teams - NHS users only.
+- Cancer Waiting Times (NHS England) is a separate, faster monthly collection.
+- No published COSD submission deadline (e.g. working days after month end) found.
+
 ## RCPath Minimum LIMS Requirements
 
 [Computerised cancer histopathology reporting, data recording and downloading to cancer registries](https://rcpath.org/asset/60CB744E%2D30CF%2D40A9%2D88327F33C0206493)
