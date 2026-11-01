@@ -15,6 +15,11 @@ imaging `DiagnosticReport` - so it is **not** part of the
 points: before the specimen is taken, at staging, at the MDT, and in imaging of
 the specimen itself.
 
+### References
+
+- [HL7 Europe Imaging Report](https://hl7.eu/fhir/imaging/en/) (1.0.0-ballot, STU 1 ballot) - FHIR model of the imaging study report in the European context, aligned with IHE RAD and IHE MADO; the imaging counterpart of [HL7 Europe Laboratory Report](https://hl7.eu/fhir/laboratory/), which this guide is based on
+- [National Imaging Registry (NIR)](https://digital.nhs.uk/services/national-imaging-registry) - NHS England service for finding and retrieving a patient's diagnostic imaging and reports held by other organisations in England, for direct care. Data stays with the originating organisation. See also the [roadmap](https://digital.nhs.uk/services/national-imaging-registry/national-imaging-registry-roadmap) and [API](https://digital.nhs.uk/developer/api-catalogue/national-imaging-registry-api) (FHIR, IHE XCA/XDS, DICOMweb)
+
 ### Overview
 
 ```mermaid
@@ -53,7 +58,9 @@ sequenceDiagram
   specimen collection actor alongside endoscopy and theatre.
 - The imaging findings - lesion site, size on imaging, radiological suspicion
   score - are useful **clinical information on the request** (LAB-1). In FHIR the
-  imaging report can be referenced from `ServiceRequest.supportingInfo`.
+  imaging report can be referenced from `ServiceRequest.supportingInfo`; its
+  content is defined by [HL7 Europe Imaging Report](https://hl7.eu/fhir/imaging/en/),
+  not by this guide.
 
 ### Staging: Clinical and Pathological
 
@@ -76,6 +83,11 @@ the core biopsy category (B1-B5) is compared with the imaging scores (R, U or M
 1-5). A discordant result can lead to a repeat biopsy - a new LAB-1 and LAB-3 - or
 further imaging. Correlation happens at the MDT, outside both LTW and the
 radiology workflow.
+
+Prior imaging from other organisations - for example when a patient was imaged at
+one hospital and is discussed at another trust's MDT - can be found and retrieved
+through the NHS England [National Imaging Registry](https://digital.nhs.uk/services/national-imaging-registry).
+NHS England lists pathology as a possible future diagnostic area for the registry.
 
 ### Imaging of the Specimen
 

@@ -140,6 +140,9 @@ cancer (`PrimaryCancerCondition`), which links them at the MDT.
   [Laboratory Testing Workflow (LTW)](LTW.html) to genomics.
 - **Orchestrated orders** - a specialty service (for example haemato-oncology)
   places separate pathology and genomic orders and produces a combined report.
+  At Manchester University NHS Foundation Trust this is **HODS** - see
+  [Orchestrated Orders (HODS)](ILW.html#orchestrated-orders-hods) and the NW GMSA
+  [Haemato-Oncology Diagnostic Pathway](https://github.com/nw-gmsa/nw-gmsa-use-cases/blob/main/HaematoOncologyPathway.md).
 
 ### Gaps
 
