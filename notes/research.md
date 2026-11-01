@@ -144,7 +144,7 @@ Added to `index.md` ("Why not use registry data?").
 ## FDP Canonical Data Model (checked 2026-11-01)
 
 Source: NW GMSA [FDP Canonical Data Model](https://github.com/nw-gmsa/nw-gmsa-use-cases/blob/main/FDPCanonicalDataModel.md).
-Added to `CancerPathway.md` ("Operational Tracking (FDP Cancer 360)").
+Added to `CancerPathway.md` ("Operational Management (FDP Cancer 360)").
 
 - Overlap is **pathway tracking and identifiers**: `Cancer Pathway`, `Patient Pathway`
   (~`EpisodeOfCare`), `Cancer Tracking Comment`, `Cancer Pathway Note`, `Mdt Meeting`,
@@ -169,6 +169,11 @@ Added to `CancerPathway.md` ("Operational Tracking (FDP Cancer 360)").
 - Cancer 360 sites ([NHS England, May 2025](https://www.england.nhs.uk/long-read/nhs-expands-cancer-technology-rollout/)):
   Chelsea and Westminster, RUH Bath; Derby and Burton implementing; 10 more
   trusts to follow. No North West trusts named.
+- Cancer 360 orders (checked 2026-11-01, DPIA template): no order/request
+  datasets; "Mean Order Day" only as a metric for radiology, endoscopy,
+  outpatients and inpatient procedures. Histology metrics: sample taken day,
+  report day, report turnaround - no order day. "Requests" are Cancer 360's own
+  actions. LAB-1, LAB-35 and LAB-36 not visible; genomics not a source.
 - **Open:** is the histopathology report fed as structured items or report-level?
   Which local cancer register (Somerset Cancer Register, Infoflex, ...) feeds it?
 - **Open:** `Histology` object properties not found. CDM operational model
