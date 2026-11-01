@@ -40,6 +40,12 @@ pages:
   ILW.md:
     title: Inter-Laboratory Workflow (ILW)
     generation: markdown
+  Imaging.md:
+    title: Imaging and Radiology
+    generation: markdown
+  Genomics.md:
+    title: Genomic Testing and Reporting
+    generation: markdown
   LAB-1.md:
     title: Placer Order Management [LAB-1]
     generation: markdown
@@ -67,6 +73,8 @@ menu:
   Analysis and Design (Volume 1):
     Laboratory Testing Workflow (LTW): LTW.html
     Inter-Laboratory Workflow (ILW): ILW.html
+    Imaging and Radiology: Imaging.html
+    Genomic Testing and Reporting: Genomics.html
   Interactions (Volume 2):
     Placer Order Management [LAB-1]: LAB-1.html
     Order Results Management [LAB-3]: LAB-3.html
