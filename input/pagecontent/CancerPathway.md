@@ -23,8 +23,11 @@ flowchart TB
     subgraph DIAG["Diagnostics"]
         B["Imaging"]
         C["Biopsy"]
-        D["Pathology report"]
+        D["Pathology"]
         E["Genomics"]
+        BR(["Imaging Report"])
+        DR(["Pathology Report"])
+        ER(["Genomic Report"])
     end
 
     F["MDT<br/>diagnosis and plan"]
@@ -38,25 +41,39 @@ flowchart TB
     J["Follow-up"]
     K["PROMs"]
 
-    A --> B --> C --> D --> E
-    D --> F
-    E --> F
-    B -.-> F
+    A --> B
+    B --> BR
+    B -->|"image-guided"| C
+    C --> D --> DR
+    DR -->|"reflex order"| E
+    E --> ER
+    BR & DR & ER --> F
     F --> G & H & I
     G -.->|"resection specimen"| D
     G & H & I --> J --> K
 
     classDef inscope fill:#d4edda,stroke:#155724,color:#155724
     classDef context fill:#f8f9fa,stroke:#6c757d,color:#495057
-    class C,D,E inscope
-    class A,B,F,G,H,I,J,K context
+    class C,D,DR,E inscope
+    class A,B,BR,ER,F,G,H,I,J,K context
 ```
 
-Green: covered by this guide. Grey: context only. Dotted lines: imaging also
-goes to the MDT directly, and surgery produces a **resection specimen**, which
-goes back to pathology for a further report - often restaging the cancer (pTNM,
-or ypTNM after neoadjuvant therapy). Each stage is described in
-[Pathway Stages](#pathway-stages) below.
+Rectangles are activities; rounded boxes are the **reports** they produce. Each
+diagnostic service produces its own report, and the MDT brings the three
+together:
+
+| Service | Report | Defined by |
+|---|---|---|
+| Imaging | Imaging Report | [HL7 Europe Imaging Report](https://hl7.eu/fhir/imaging/en/) - see [Imaging and Radiology](Imaging.html) |
+| Pathology | Pathology Report | This guide - [Cancer Pathology Report](PathologyReport.html) |
+| Genomics | Genomic Report | NW Genomics [Genomic Test Report](https://nw-gmsa.github.io/en/Questionnaire-GenomicTestReport.html) - see [Genomic Testing and Reporting](Genomics.html) |
+{:.grid}
+
+Green: covered by this guide. Grey: context only. The Pathology Report is also
+the input to the genomic reflex order. The dotted line shows surgery producing a
+**resection specimen**, which goes back to pathology for a further report - often
+restaging the cancer (pTNM, or ypTNM after neoadjuvant therapy). Each stage is
+described in [Pathway Stages](#pathway-stages) below.
 
 ### Pathway Stages
 
