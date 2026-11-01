@@ -351,16 +351,20 @@ through the trust's local cancer register - varies by trust (**to confirm**).
    separate extracts, in different formats, on different timescales (hourly
    versus monthly). The same pathology item may be extracted, transformed and
    checked twice, with no guarantee that the two copies agree.
-2. **NDRS defines a data standard, but it is not used earlier in the system,
-   where it is probably also required.** COSD defines the cancer pathology items
-   and their national codes, but it is applied only at the end, in the monthly
-   submission to NDRS. Upstream - the report from the LIMS to the EPR, the feed
-   into the trust data warehouse and FDP, the reflex order to genomics - the
-   same items travel in local formats, or as report text. Tracking, the MDT and
-   genomics need the same content, and need it sooner. This guide proposes using
-   the COSD content **at the point the report is issued** (LAB-3, LAB-35), so the
-   clinical, operational management and analytic routes can start from the same
-   structured data.
+2. **NDRS codes a subset of the RCPath standard, but neither is used earlier in
+   the system, where they are probably also required.** The Royal College of
+   Pathologists (RCPath) cancer datasets are the professional standard for what a
+   pathologist reports, and how - including synoptic and supplementary reports.
+   COSD Pathology is
+   "[a subset of the RCPath cancer data sets](https://nhsd-proxy.openprescribing.net/ndrs/data/data-sets/cosd/cosd-pathology-user-guide-v5.0/core---pathology)",
+   aligned with the RCPath core items, and adds the national codes. But the codes
+   are applied only at the end, in the monthly submission to NDRS. Upstream - the
+   report from the LIMS to the EPR, the feed into the trust data warehouse and
+   FDP, the reflex order to genomics - the same items travel in local formats, or
+   as report text. Tracking, the MDT and genomics need the same content, and need
+   it sooner. This guide proposes using the COSD content and codes **at the point
+   the report is issued** (LAB-3, LAB-35), so the clinical, operational management
+   and analytic routes can start from the same structured data.
 
 ### Patient-Reported Outcomes
 

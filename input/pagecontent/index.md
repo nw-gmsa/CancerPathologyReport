@@ -23,6 +23,13 @@ dataset defines the content that pathology laboratories already collect for ever
 registrable cancer report. Registry submission itself (monthly COSD XML) is out of
 scope.
 
+COSD Pathology is itself
+"[a subset of the RCPath cancer data sets](https://nhsd-proxy.openprescribing.net/ndrs/data/data-sets/cosd/cosd-pathology-user-guide-v5.0/core---pathology)",
+aligned with the Royal College of Pathologists (RCPath) core items, with national
+codes added. RCPath sets the professional standard for what a pathologist reports
+and how; COSD codes the subset the registry needs. This guide models **COSD core
+only** - COSD site-specific items and RCPath non-core items are not modelled.
+
 #### Why not use registry data?
 
 Registry data is built for audit, research and national statistics, not for
