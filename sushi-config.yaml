@@ -34,6 +34,9 @@ pages:
   index.md:
     title: Home
     generation: markdown
+  CancerPathway.md:
+    title: Cancer Pathway
+    generation: markdown
   LTW.md:
     title: Laboratory Testing Workflow (LTW)
     generation: markdown
@@ -71,6 +74,7 @@ pages:
 menu:
   Home: index.html
   Analysis and Design (Volume 1):
+    Cancer Pathway: CancerPathway.html
     Laboratory Testing Workflow (LTW): LTW.html
     Inter-Laboratory Workflow (ILW): ILW.html
     Imaging and Radiology: Imaging.html
