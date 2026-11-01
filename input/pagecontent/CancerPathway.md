@@ -262,15 +262,34 @@ the pathology laboratory, and uses COSD only to define its content - see
 
 ### Data Engineering: FDP Cancer 360 and NDRS
 
-The same trust source systems feed both FDP Cancer 360 (operational management)
-and NDRS (analytic), through separate data engineering routes, alongside the
-clinical exchange this guide defines:
+The same source systems feed both FDP Cancer 360 (operational management) and
+NDRS (analytic), through separate data engineering routes. Not all of them
+belong to the trust:
+
+- **Regional source systems** - the Genomic Laboratory Hub's genomic LIMS, shared
+  across the region.
+- **ICB source systems** - pathology and radiology are increasingly provided by
+  networks shared between trusts in an Integrated Care Board area (for example a
+  single pathology LIMS across a pathology network).
+- **Trust source systems** - endoscopy, oncology, the EPR / PAS and the local
+  cancer register.
+
+The **Trust Integration Engine** exchanges orders, requests, bookings, results
+and reports between these systems - this is where the clinical exchange this
+guide defines (LAB-3, LAB-35) takes place:
 
 ```mermaid
 flowchart TB
-    subgraph SRC["Trust source systems"]
+    subgraph REG["Regional source systems"]
+        GLIMS["Genomic LIMS"]
+    end
+
+    subgraph ICB["ICB source systems"]
         LIMS["Pathology LIMS"]
         RIS["Radiology (RIS)"]
+    end
+
+    subgraph SRC["Trust source systems"]
         ENDO["Endoscopy"]
         ONC["Oncology / SACT"]
         EPR["EPR / PAS"]
@@ -282,8 +301,8 @@ flowchart TB
         EXT["COSD, SACT, RTDS<br/>extracts"]
     end
 
-    subgraph CLIN["Clinical - days"]
-        OPX["Clinical exchange<br/>LAB-3, LAB-35"]
+    subgraph CLIN["Trust Integration Engine"]
+        OPX["Orders, requests, bookings,<br/>results and reports<br/>e.g. LAB-1, LAB-3, LAB-35"]
     end
 
     subgraph MGMT["Operational management - hours to days"]
@@ -295,10 +314,13 @@ flowchart TB
         OUT["Rapid registration, audits,<br/>statistics, PROMs sampling"]
     end
 
-    LIMS -->|"this guide:<br/>COSD content"| OPX
+    SRC <-->|"event messages<br/>(real time - HL7)"| CLIN
+    ICB <-->|"event messages<br/>(real time - HL7)"| CLIN
+    GLIMS <-->|"LAB-35, LAB-36"| OPX
+    LIMS -->|"this guide:<br/>Cancer Pathology Report"| OPX
     LIMS & RIS & ENDO & ONC & EPR & CR --> DW
     DW -->|"local formats,<br/>hourly"| C360
-    OPX -.->|"near real time<br/>event feed"| C360
+    OPX -.->|"real time<br/>event feed"| C360
     OPX -.->|"in some trusts"| DW
     LIMS & CR & ONC --> EXT
     EXT -->|"COSD standard,<br/>monthly"| NDRS
@@ -309,14 +331,15 @@ flowchart TB
     classDef context fill:#f8f9fa,stroke:#6c757d,color:#495057
     class OPX inscope
     class EXT,NDRS cosd
-    class LIMS,RIS,ENDO,ONC,EPR,CR,DW,C360,OUT context
+    class GLIMS,LIMS,RIS,ENDO,ONC,EPR,CR,DW,C360,OUT context
 ```
 
 Green: this guide. Amber: where the COSD standard is applied today. The dotted
-line is a possible **near real time event feed**: the same LAB-3 and LAB-35
-messages that carry the report and the reflex order could also notify Cancer 360
+line is a possible **real time event feed**: the same messages that the
+Trust Integration Engine already routes - including the LAB-3 report and the
+LAB-35 reflex order - could also notify Cancer 360
 as each report is issued, instead of it waiting for the next warehouse
-extract. In some trusts the clinical messages already feed the trust data
+extract. In some trusts the integration engine already feeds the trust data
 warehouse (dotted line to the warehouse), so their content reaches Cancer 360
 through the warehouse extract instead. How
 pathology data reaches the COSD extract - directly from the laboratory, or
