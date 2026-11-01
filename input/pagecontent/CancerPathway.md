@@ -111,6 +111,36 @@ are from [mCODE](https://hl7.org/fhir/us/mcode/), which this guide is aligned wi
 | Patient experience | [National Cancer Patient Experience Survey (CPES)](https://www.ncpes.co.uk/) | - |
 {:.grid}
 
+### Operational Tracking (FDP Cancer 360)
+
+Managing patients through the pathway - who is waiting, at which stage, and
+against which waiting time standard - is done by cancer tracking teams. The NHS
+Federated Data Platform (FDP) product **Cancer 360** brings data from different
+systems into a single, automatically updated tracking list of patients on a
+cancer diagnosis pathway
+([Digital Health, February 2025](https://www.digitalhealth.net/2025/02/cancer-diagnostic-pathway-tool-to-launch-on-fdp/)).
+
+The FDP Canonical Data Model overlaps with this guide in **pathway tracking and
+identifiers**, not in the clinical content of the report (see the NW GMSA
+[FDP Canonical Data Model](https://github.com/nw-gmsa/nw-gmsa-use-cases/blob/main/FDPCanonicalDataModel.md)
+analysis):
+
+| Area | FDP Canonical Data Model | This guide |
+|---|---|---|
+| Pathway | `Cancer Pathway`, `Patient Pathway`, cancer tracking comments | [Cancer Pathway](CancerPathway.html) (context) |
+| MDT | `Mdt Meeting`, `Mdt Note` | Context |
+| Diagnosis | `Patient Diagnosis` (SNOMED CT, ICD-10) | pCR0810, pCR6410, pCR6420 |
+| Report | `Histology` - one object per discipline | [Cancer Pathology Diagnostic Report](StructureDefinition-CancerPathologyDiagnosticReport.html) |
+| Results | `Test Result` - one flat row per result; no LOINC, no order object | Coded `Observation`s grouped by the report |
+| Identifiers | `Test Result.Laboratory Number` | `Specimen.accessionIdentifier`, order numbers |
+{:.grid}
+
+The COSD synoptic content - histological type and grade, pTNM, margins, invasion,
+tumour size, MMR IHC - has no equivalent in the FDP Canonical Data Model. What
+tracking needs from the pathology report is the **milestone** (report authorised,
+`DiagnosticReport.issued`, pCR0780), the diagnosis it confirms, and the
+identifiers that link it to the patient's pathway.
+
 ### Patient-Reported Outcomes
 
 PROMs are not a single step at the end of the pathway:

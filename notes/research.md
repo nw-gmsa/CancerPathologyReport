@@ -141,6 +141,27 @@ Added to `index.md` ("Why not use registry data?").
 - Cancer Waiting Times (NHS England) is a separate, faster monthly collection.
 - No published COSD submission deadline (e.g. working days after month end) found.
 
+## FDP Canonical Data Model (checked 2026-11-01)
+
+Source: NW GMSA [FDP Canonical Data Model](https://github.com/nw-gmsa/nw-gmsa-use-cases/blob/main/FDPCanonicalDataModel.md).
+Added to `CancerPathway.md` ("Operational Tracking (FDP Cancer 360)").
+
+- Overlap is **pathway tracking and identifiers**: `Cancer Pathway`, `Patient Pathway`
+  (~`EpisodeOfCare`), `Cancer Tracking Comment`, `Cancer Pathway Note`, `Mdt Meeting`,
+  `Mdt Note`, `Patient Diagnosis` (SNOMED CT / ICD-10), `Cancer Treatment`.
+- Diagnostics are thin: `Histology`, `Endoscopy`, `Radiology Exam` (one object per
+  discipline); `Test Result` is one flat row per result, "SNOMED or ICD10" in one
+  field, no LOINC, no order object, no placer/filler numbers. Only lab identifier
+  is `Test Result.Laboratory Number` (specimen accession number).
+- No equivalent of the COSD synoptic content. CDM is "standards aligned, not
+  standards bound"; no published FHIR mapping.
+- FDP product: **Cancer 360** - single tracking list of patients on a cancer
+  diagnosis pathway ([Digital Health, Feb 2025](https://www.digitalhealth.net/2025/02/cancer-diagnostic-pathway-tool-to-launch-on-fdp/)).
+- What tracking needs from this report: milestone (`DiagnosticReport.issued`,
+  pCR0780), diagnosis, identifiers (accession number, order numbers, PPID).
+- **Open:** `Histology` object properties not found. CDM operational model
+  reportedly on GitHub ([Computer Weekly](https://www.computerweekly.com/opinion/Inside-FDP-part-4-The-NHS-data-model)) - not located.
+
 ## RCPath Minimum LIMS Requirements
 
 [Computerised cancer histopathology reporting, data recording and downloading to cancer registries](https://rcpath.org/asset/60CB744E%2D30CF%2D40A9%2D88327F33C0206493)
